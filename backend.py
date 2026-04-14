@@ -5,9 +5,10 @@ from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from transformers import pipeline
 
-qa_pipeline = pipeline(
-    "question-answering",
-    model="distilbert-base-cased-distilled-squad"
+# ✅ Generative model
+generator = pipeline(
+    "text2text-generation",
+    model="google/flan-t5-base"
 )
 
 def process_pdf(file_path):
@@ -27,13 +28,23 @@ def process_pdf(file_path):
 
     return text_splitter.split_documents(documents)
 
+
 def ask_question(vector_db, query):
     docs = vector_db.similarity_search(query, k=3)
     context = " ".join([doc.page_content for doc in docs])
 
-    result = qa_pipeline(
-        question=query,
-        context=context
-    )
+    prompt = f"""
+Answer the question based on the context below.
 
-    return result["answer"]
+Context:
+{context}
+
+Question:
+{query}
+
+Answer in a complete and clear sentence:
+"""
+
+    result = generator(prompt, max_length=200)
+
+    return result[0]["generated_text"]
