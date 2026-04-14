@@ -1,4 +1,4 @@
-import google.generativeai as genai
+from google import genai
 import os
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -44,7 +44,7 @@ Answer:
 """
     
     # Initialize Gemini model and generate the answer
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel("gemini-pro")
     response = model.generate_content(prompt)
 
     return response.text
