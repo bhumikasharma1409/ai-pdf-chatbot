@@ -1,15 +1,12 @@
+import google.generativeai as genai
 import os
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from transformers import pipeline
 
-# ✅ Generative model
-generator = pipeline(
-    "text2text-generation",
-    model="google/flan-t5-base"
-)
+# ✅ Configure Gemini using environment variable securely
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 def process_pdf(file_path):
     abs_path = os.path.abspath(file_path)
@@ -34,7 +31,8 @@ def ask_question(vector_db, query):
     context = " ".join([doc.page_content for doc in docs])
 
     prompt = f"""
-Answer the question based on the context below.
+Answer the question ONLY based on the context provided below. Do not hallucinate or use outside information.
+Provide a clear and detailed explanation in exactly 4-5 sentences.
 
 Context:
 {context}
@@ -42,9 +40,11 @@ Context:
 Question:
 {query}
 
-Answer in a complete and clear sentence:
+Answer:
 """
+    
+    # Initialize Gemini model and generate the answer
+    model = genai.GenerativeModel('gemini-1.5-flash')
+    response = model.generate_content(prompt)
 
-    result = generator(prompt, max_length=200)
-
-    return result[0]["generated_text"]
+    return response.text
