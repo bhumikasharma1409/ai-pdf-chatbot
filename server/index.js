@@ -2,7 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
 import path from 'path';
+import fs from 'fs/promises';
+import * as pdfParseModule from 'pdf-parse';
 import { fileURLToPath } from 'url';
+
+const pdfParse = pdfParseModule.default ?? pdfParseModule;
 
 const app = express();
 const PORT = 5000;
@@ -32,6 +36,12 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+const extractTextFromPDF = async (filePath) => {
+  const fileBuffer = await fs.readFile(filePath);
+  const parsed = await pdfParse(fileBuffer);
+  return parsed.text || '';
+};
+
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
@@ -52,19 +62,33 @@ app.get('/api/test', (req, res) => {
 });
 
 // PDF upload route
-app.post('/api/upload', upload.single('pdf'), (req, res) => {
+app.post('/api/upload', upload.single('pdf'), async (req, res) => {
   try {
     if (!req.file) {
       console.log('No file uploaded');
       return res.status(400).json({ error: 'No PDF file uploaded' });
     }
 
+    const uploadedPath = req.file.path;
     console.log('File uploaded successfully:', req.file.filename);
-    res.json({
-      message: 'PDF uploaded successfully',
-      filename: req.file.filename,
-      size: req.file.size
-    });
+
+    let extractedText = '';
+    try {
+      extractedText = await extractTextFromPDF(uploadedPath);
+      const preview = extractedText.trim().slice(0, 300);
+      console.log('Extracted text preview:', preview);
+
+      res.json({
+        message: 'PDF uploaded and parsed successfully',
+        filename: req.file.filename,
+        size: req.file.size,
+        preview,
+        textLength: extractedText.length
+      });
+    } catch (parseError) {
+      console.error('PDF parsing failed:', parseError);
+      return res.status(500).json({ error: 'PDF parsing failed', details: parseError.message });
+    }
   } catch (error) {
     console.error('Upload error:', error);
     res.status(500).json({ error: 'Internal server error during upload' });

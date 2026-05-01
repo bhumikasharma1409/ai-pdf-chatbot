@@ -10,7 +10,7 @@ function App() {
   const fetchServerTest = async () => {
     setLoading(true)
     try {
-      const response = await fetch('http://localhost:5000/api/test')
+      const response = await fetch('http://localhost:8000/api/test')
       const data = await response.json()
       setServerResponse(data.message)
     } catch (error) {
@@ -45,7 +45,7 @@ function App() {
     formData.append('pdf', selectedFile)
 
     try {
-      const response = await fetch('http://localhost:5000/api/upload', {
+      const response = await fetch('http://localhost:8000/api/upload', {
         method: 'POST',
         body: formData
       })

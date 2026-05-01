@@ -59,3 +59,35 @@ coverage/
 # Runtime
 dist-ssr/
 *.local
+
+# Node modules
+node_modules/
+*/node_modules/
+
+# Python virtualenvs and caches
+venv/
+python-server/venv/
+server/venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.python-version
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Uploaded or generated files
+server/uploads/
+python-server/uploads/
+
+# Python virtualenv and caches
+python-server/venv/
+python-server/__pycache__/
+python-server/*.py[cod]
+
+# Uploaded or generated PDF files
+server/uploads/
+python-server/uploads/
