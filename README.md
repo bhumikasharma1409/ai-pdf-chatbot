@@ -1,4 +1,4 @@
-# 📄 AI-Powered PDF Assistant
+#  AI-Powered PDF Assistant
 
 <p align="center">
   <b>AI-driven PDF processing system for intelligent document interaction and analysis</b>
@@ -25,19 +25,19 @@ It enables users to:
 
 ---
 
-## ⚡ Key Features
+##  Key Features
 
-✨ Secure PDF upload system  
-📁 Automatic file storage with unique naming  
-🧠 AI-based document processing  
-⚡ FastAPI-powered backend for high performance  
-🔒 PDF validation with size limits  
-🔄 Real-time processing workflow  
-🌐 Seamless Node.js + Python integration  
+ Secure PDF upload system  
+ Automatic file storage with unique naming  
+ AI-based document processing  
+ FastAPI-powered backend for high performance  
+ PDF validation with size limits  
+ Real-time processing workflow  
+ Seamless Node.js + Python integration  
 
 ---
 
-## 🔍 Detailed Features
+##  Detailed Features
 
 ### 📁 Secure Upload System
 - Validates file type and size before upload  
@@ -61,24 +61,24 @@ It enables users to:
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
-### 💻 Frontend
+### Frontend
 - HTML  
 - CSS  
 - JavaScript  
 
-### ⚙️ Backend (Node.js)
+###  Backend (Node.js)
 - Express.js  
 - Multer  
 
-### 🧠 Backend (Python)
+###  Backend (Python)
 - FastAPI  
 - PDF Processing Libraries  
 
 ---
 
-## 🚀 Installation & Setup
+##  Installation & Setup
 
 ```bash
 # Clone Repository
@@ -135,13 +135,13 @@ project-root/
 
 ---
 
-## 🎯 Applications
+##  Applications
 
-📄 Document analysis systems  
-🏢 Enterprise file processing  
-📚 Study & research tools  
-⚖️ Legal document review  
-📊 Data extraction systems  
+ Document analysis systems  
+ Enterprise file processing  
+ Study & research tools  
+ Legal document review  
+ Data extraction systems  
 
 ---
 
@@ -150,8 +150,3 @@ project-root/
 **Bhumika Sharma**  
 
 
-
-
----
-
-<p align="center"> Made with ❤️ using AI & Full Stack Development </p>
