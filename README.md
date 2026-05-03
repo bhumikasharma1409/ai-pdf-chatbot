@@ -13,21 +13,6 @@
 
 ---
 
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Key Features](#-key-features)
-- [Detailed Features](#-detailed-features)
-- [Tech Stack](#-tech-stack)
-- [Installation](#-installation--setup)
-- [Usage](#-usage)
-- [Workflow](#-workflow)
-- [Project Structure](#-project-structure)
-- [Applications](#-applications)
-- [Author](#-author)
-
----
-
 ## 📌 Overview
 
 The **AI-Powered PDF Assistant** is a full-stack application that transforms static PDF documents into intelligent, interactive data sources.
